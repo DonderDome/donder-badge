@@ -123,6 +123,7 @@ export class BoilerplateCard extends LitElement {
         background: var(--primary-background-color);
         font-size: .8em;
         --mdc-icon-size: 1.7em;
+        text-transform: capitalize;
       }
       .state-badge.off {
         color: rgba(255, 255, 255, .7);
@@ -138,9 +139,9 @@ export class BoilerplateCard extends LitElement {
   private _handleMoreInfoAction(ev: ActionHandlerEvent, config): void {
     console.log("more-info", config)
     ev.stopPropagation();
-    // this.hass.callService('browser_mod', 'more_info', {
-    //   entity: entity,
-    // })
+    this.hass.callService('browser_mod', 'more_info', {
+      entity: config.entity,
+    })
   }
 
   private _handleLightAction(ev: ActionHandlerEvent, config): void {
