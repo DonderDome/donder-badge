@@ -142,7 +142,7 @@ export class BoilerplateCard extends LitElement {
   }
 
   protected renderLightBadge(config): TemplateResult {
-    console.log(config)
+    console.log(config);
     // Light: Toggles on/of, show "On" UI when on
     return html`
       <div class='light-badge'>
@@ -153,7 +153,7 @@ export class BoilerplateCard extends LitElement {
   }
 
   protected renderShutterBadge(config): TemplateResult {
-    console.log(config)
+    console.log(config);
     // Shutter: Toggles more info, shows icon and no on/off status
     return html`
       <div class='shutter-badge'>
@@ -163,7 +163,7 @@ export class BoilerplateCard extends LitElement {
   }
 
   protected renderGadgetBadge(config): TemplateResult {
-    console.log(config)
+    console.log(config);
     // Gadget: Same as light, different icon
     return html`
       <div class='gadget-badge'>
