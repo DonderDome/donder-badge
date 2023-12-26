@@ -158,15 +158,12 @@ export class BoilerplateCard extends LitElement {
 
     switch(entity_type) {
       case "boolean":
-        console.log("boolean", entity, entity_data)
         this.hass.callService('input_boolean', 'toggle', {entity_id: entity})
         break
       case "lights":
-        console.log("lights", entity, entity_data)
         this.hass.callService('light', 'toggle', {entity_id: entity, ...entity_data})
         break
       case "switch":
-        console.log("switch", entity, entity_data)
         this.hass.callService('switch', 'toggle', {entity_id: entity})
         break
     }
