@@ -112,8 +112,8 @@ export class BoilerplateCard extends LitElement {
         
       }
       .state-badge {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
         border-radius: 100%;
         display: flex;
         align-content: center;
@@ -124,6 +124,10 @@ export class BoilerplateCard extends LitElement {
         font-size: .8em;
         --mdc-icon-size: 1.7em;
         text-transform: capitalize;
+      }
+      .state-badge.climate-badge {
+        width: 60px;
+        height: 60px;
       }
       .state-badge.off {
         color: rgba(255, 255, 255, .7);
@@ -258,14 +262,14 @@ export class BoilerplateCard extends LitElement {
   }
 
   protected renderBadge(config): TemplateResult {
-    const { entityType } = config
-    if (entityType === 'climate') {
+    const { entity_type } = config
+    if (entity_type === 'climate') {
       return this.renderClimateBadge(config)
-    } else if (entityType === 'light') {
+    } else if (entity_type === 'light') {
       return this.renderLightBadge(config)
-    } else if (entityType === 'shutter') {
+    } else if (entity_type === 'shutter') {
       return this.renderShutterBadge(config)
-    } else if (entityType === 'gadget') {
+    } else if (entity_type === 'gadget') {
       return this.renderGadgetBadge(config)
     } else {
       return html`
