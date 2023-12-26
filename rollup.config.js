@@ -32,7 +32,7 @@ const plugins = [
 
 export default [
   {
-    input: 'src/jarvis-widget-template.ts',
+    input: 'src/donder-badge.ts',
     output: {
       dir: 'dist',
       format: 'es',

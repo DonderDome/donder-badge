@@ -25,23 +25,23 @@ import { actionHandler } from './action-handler-directive';
 
 /* eslint no-console: 0 */
 console.info(
-  `%c  JARVIS-WIDGET-TEMPLATE \n%c  version: ${CARD_VERSION}  `,
+  `%c  donder-badge \n%c  version: ${CARD_VERSION}  `,
   'color: orange; font-weight: bold; background: black',
   'color: white; font-weight: bold; background: dimgray',
 );
 
 (window as any).customCards = (window as any).customCards || [];
 (window as any).customCards.push({
-  type: 'jarvis-widget-template',
+  type: 'donder-badge',
   name: 'Boilerplate Card',
   description: 'A template custom card for you to create something awesome',
 });
 
 export class BoilerplateCard extends LitElement {
   public static async getConfigElement(): Promise<LovelaceCardEditor> {
-    // REPLACE "jarvis-widget-template" with widget name, everywhere in the project
+    // REPLACE "donder-badge" with widget name, everywhere in the project
     // REPLACE the file name with the actual widget name
-    return document.createElement('jarvis-widget-template-editor');
+    return document.createElement('donder-badge-editor');
   }
 
   public static getStubConfig(): Record<string, unknown> {
@@ -102,35 +102,97 @@ export class BoilerplateCard extends LitElement {
 
   static get styles(): CSSResultGroup {
     return css`
-      /* REPLACE "jarvis-widget-template" with actual widget name */
-      .type-custom-jarvis-widget-template {
+      /* REPLACE "donder-badge" with actual widget name */
+      .type-custom-donder-badge {
         height: 100%;
         width: 100%;
       }
-      .jarvis-widget {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        padding: 20px;
-        box-sizing: border-box;
-        border: 1px solid #fff;
+      .donder-badge {
+        
       }
     `;
   }
 
+  private _handleMoreInfoAction(ev: ActionHandlerEvent, entity): void {
+    ev.stopPropagation();
+    this.hass.callService('browser_mod', 'more_info', {
+      entity: entity,
+    })
+  }
+
+  protected renderClimateBadge(config): TemplateResult {
+    // Climate: Opens more info, shows temperature on off/on, has an "On" UI when on
+    const { entity } = config
+    const { state, attributes } = this.hass.states[entity]
+
+    return html`
+      <ha-card
+        @action=${(ev) => this._handleMoreInfoAction(ev, entity)}
+        .actionHandler=${actionHandler({
+          hasHold: hasAction(this.config.hold_action),
+          hasDoubleClick: hasAction(this.config.double_tap_action),
+        })}
+        tabindex="0"
+        class=${`climate-badge ${state}`}
+      >
+        <ha-icon icon='mdi:thermometer'></ha-icon>
+        <span>${attributes.current_temperature}${attributes.temperature_unit}</span>
+      </ha-card>>
+    `
+  }
+
+  protected renderLightBadge(config): TemplateResult {
+    console.log(config)
+    // Light: Toggles on/of, show "On" UI when on
+    return html`
+      <div class='light-badge'>
+        <ha-icon icon='mdi:lightbulb'></ha-icon>
+        <span>On</span>
+      </div>
+    `
+  }
+
+  protected renderShutterBadge(config): TemplateResult {
+    console.log(config)
+    // Shutter: Toggles more info, shows icon and no on/off status
+    return html`
+      <div class='shutter-badge'>
+        <ha-icon icon='mdi:window-shutter'></ha-icon>
+      </div>
+    `
+  }
+
+  protected renderGadgetBadge(config): TemplateResult {
+    console.log(config)
+    // Gadget: Same as light, different icon
+    return html`
+      <div class='gadget-badge'>
+        <ha-icon icon='mdi:lightbulb'></ha-icon>
+        <span>On</span>
+      </div>
+    `
+  }
+
+  protected renderBadge(config): TemplateResult {
+    const { type } = config
+    if (type === 'climate') {
+      return this.renderClimateBadge(config)
+    } else if (type === 'light') {
+      return this.renderLightBadge(config)
+    } else if (type === 'shutter') {
+      return this.renderShutterBadge(config)
+    } else if (type === 'gadget') {
+      return this.renderGadgetBadge(config)
+    } else {
+      return html`
+        <div class='unknown-badge'>
+          <ha-icon icon='mdi:help'></ha-icon>
+        </div>
+      `
+    }
+  }
+
   protected render(): TemplateResult | void {
-    /*
-      ## INTERFACE
-      - this.hass: A lot of information about everything in HA, such as states, theme, etc. The source of the tree
-        - states: States of each of the components available
-      - this.config: Lovelace settings for this instance
-
-      Example: this.hass.states[this.config.entities[0]] shows the state of the first component
-     */
-
-    // TODO Check for stateObj or other necessary things and render a warning if missing
     if (this.config.show_warning) {
       return this._showWarning('warning message');
     }
@@ -141,19 +203,19 @@ export class BoilerplateCard extends LitElement {
 
     return html`
       <ha-card
-        .header=${this.config.name}
         @action=${this._handleAction}
         .actionHandler=${actionHandler({
           hasHold: hasAction(this.config.hold_action),
           hasDoubleClick: hasAction(this.config.double_tap_action),
         })}
         tabindex="0"
-        .label=${`Boilerplate: ${this.config || 'No Entity Defined'}`}
       >
-        <div class='jarvis-widget'>It's the template!</div>
+        <div class='donder-badge'>
+          ${this.renderBadge(this.config)}
+        </div>
       </ha-card>
     `;
   }
 }
 
-customElements.define("jarvis-widget-template", BoilerplateCard);
+customElements.define("donder-badge", BoilerplateCard);
