@@ -129,7 +129,12 @@ export class BoilerplateCard extends LitElement {
         color: rgba(255, 255, 255, .7);
         background: var(--primary-background-color);
       }
-      .state-badge.on {
+      .state-badge.on,
+      .state-badge.heat_cool,
+      .state-badge.heat,
+      .state-badge.cool,
+      .state-badge.auto,
+      .state-badge.dry {
         color: var(--primary-background-color);
         background: var(--primary-color);
       }
@@ -167,6 +172,14 @@ export class BoilerplateCard extends LitElement {
     // Climate: Opens more info, shows temperature on off/on, has an "On" UI when on
     const { entity } = config
     const { state, attributes } = this.hass.states[entity]
+    const stateIcons = {
+      'heat_cool': 'mdi:sun-snowflake-variant',
+      'heat': 'mdi:fire',
+      'cool': 'mdi:snowflake',
+      'auto': 'mdi:autorenew',
+      'dry': 'mdi:water-percent',
+      'off': 'mdi:power',
+    }
 
     return html`
       <ha-card
@@ -178,7 +191,7 @@ export class BoilerplateCard extends LitElement {
         tabindex="0"
         class=${`climate-badge state-badge ${state}`}
       >
-        <ha-icon icon='mdi:thermometer'></ha-icon>
+        <ha-icon icon=${stateIcons[state]}></ha-icon>
         <div>${attributes.current_temperature}${attributes.temperature_unit}</div>
       </ha-card>
     `
@@ -200,7 +213,6 @@ export class BoilerplateCard extends LitElement {
         class=${`light-badge state-badge ${state}`}
       >
         <ha-icon icon='mdi:thermometer'></ha-icon>
-        <div>${state}</div>
       </ha-card>
     `
   }
@@ -241,7 +253,6 @@ export class BoilerplateCard extends LitElement {
         class=${`gadget-badge state-badge ${state}`}
       >
         <ha-icon icon='mdi:thermometer'></ha-icon>
-        <div>${state}</div>
       </ha-card>
     `
   }

@@ -214,7 +214,12 @@ const G=(t,e)=>"method"===e.kind&&e.descriptor&&!("value"in e.descriptor)?{...e,
         color: rgba(255, 255, 255, .7);
         background: var(--primary-background-color);
       }
-      .state-badge.on {
+      .state-badge.on,
+      .state-badge.heat_cool,
+      .state-badge.heat,
+      .state-badge.cool,
+      .state-badge.auto,
+      .state-badge.dry {
         color: var(--primary-background-color);
         background: var(--primary-color);
       }
@@ -225,7 +230,7 @@ const G=(t,e)=>"method"===e.kind&&e.descriptor&&!("value"in e.descriptor)?{...e,
         tabindex="0"
         class=${`climate-badge state-badge ${i}`}
       >
-        <ha-icon icon='mdi:thermometer'></ha-icon>
+        <ha-icon icon=${{heat_cool:"mdi:sun-snowflake-variant",heat:"mdi:fire",cool:"mdi:snowflake",auto:"mdi:autorenew",dry:"mdi:water-percent",off:"mdi:power"}[i]}></ha-icon>
         <div>${o.current_temperature}${o.temperature_unit}</div>
       </ha-card>
     `}renderLightBadge(t){const{entity:e}=t,{state:i}=this.hass.states[e];return H`
@@ -236,7 +241,6 @@ const G=(t,e)=>"method"===e.kind&&e.descriptor&&!("value"in e.descriptor)?{...e,
         class=${`light-badge state-badge ${i}`}
       >
         <ha-icon icon='mdi:thermometer'></ha-icon>
-        <div>${i}</div>
       </ha-card>
     `}renderShutterBadge(t){const{entity:e}=t,{state:i}=this.hass.states[e];return H`
       <ha-card
@@ -255,7 +259,6 @@ const G=(t,e)=>"method"===e.kind&&e.descriptor&&!("value"in e.descriptor)?{...e,
         class=${`gadget-badge state-badge ${i}`}
       >
         <ha-icon icon='mdi:thermometer'></ha-icon>
-        <div>${i}</div>
       </ha-card>
     `}renderBadge(t){const{entityType:e}=t;return"climate"===e?this.renderClimateBadge(t):"light"===e?this.renderLightBadge(t):"shutter"===e?this.renderShutterBadge(t):"gadget"===e?this.renderGadgetBadge(t):H`
         <div class='unknown-badge'>
