@@ -119,6 +119,9 @@ export class BoilerplateCard extends LitElement {
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        background: var(--label-badge-background-color);
+        font-size: .8em;
+        --mdc-icon-size: 1.7em;
       }
     `;
   }

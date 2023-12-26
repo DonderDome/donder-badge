@@ -204,6 +204,9 @@ const G=(t,e)=>"method"===e.kind&&e.descriptor&&!("value"in e.descriptor)?{...e,
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        background: var(--label-badge-background-color);
+        font-size: .8em;
+        --mdc-icon-size: 1.7em;
       }
     `}_handleMoreInfoAction(t,e){t.stopPropagation(),console.log(e)}renderClimateBadge(t){const{entity:e}=t,{state:i,attributes:n}=this.hass.states[e];return O`
       <ha-card
