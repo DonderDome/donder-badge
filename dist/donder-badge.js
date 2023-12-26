@@ -219,7 +219,7 @@ const G=(t,e)=>"method"===e.kind&&e.descriptor&&!("value"in e.descriptor)?{...e,
         <ha-icon icon='mdi:lightbulb'></ha-icon>
         <span>On</span>
       </div>
-    `}renderBadge(t){const{type:e}=t;return"climate"===e?this.renderClimateBadge(t):"light"===e?this.renderLightBadge(t):"shutter"===e?this.renderShutterBadge(t):"gadget"===e?this.renderGadgetBadge(t):O`
+    `}renderBadge(t){const{entityType:e}=t;return"climate"===e?this.renderClimateBadge(t):"light"===e?this.renderLightBadge(t):"shutter"===e?this.renderShutterBadge(t):"gadget"===e?this.renderGadgetBadge(t):O`
         <div class='unknown-badge'>
           <ha-icon icon='mdi:help'></ha-icon>
         </div>

@@ -174,14 +174,14 @@ export class BoilerplateCard extends LitElement {
   }
 
   protected renderBadge(config): TemplateResult {
-    const { type } = config
-    if (type === 'climate') {
+    const { entityType } = config
+    if (entityType === 'climate') {
       return this.renderClimateBadge(config)
-    } else if (type === 'light') {
+    } else if (entityType === 'light') {
       return this.renderLightBadge(config)
-    } else if (type === 'shutter') {
+    } else if (entityType === 'shutter') {
       return this.renderShutterBadge(config)
-    } else if (type === 'gadget') {
+    } else if (entityType === 'gadget') {
       return this.renderGadgetBadge(config)
     } else {
       return html`
