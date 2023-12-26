@@ -146,7 +146,6 @@ export class BoilerplateCard extends LitElement {
   }
 
   private _handleMoreInfoAction(ev: ActionHandlerEvent, config): void {
-    console.log("more-info", config)
     ev.stopPropagation();
     this.hass.callService('browser_mod', 'more_info', {
       entity: config.entity,
@@ -154,9 +153,7 @@ export class BoilerplateCard extends LitElement {
   }
 
   private _handleLightAction(ev: ActionHandlerEvent, config): void {
-    console.log("light", config)
     const { entity, entity_data, entity_type } = config
-
     ev.stopPropagation();
 
     switch(entity_type) {
@@ -164,6 +161,7 @@ export class BoilerplateCard extends LitElement {
         this.hass.callService('input_boolean', 'toggle', {entity_id: entity})
         break
       case "lights":
+        console.log("lights", entity, entity_data)
         this.hass.callService('light', 'toggle', {entity_id: entity, ...entity_data})
         break
       case "switch":

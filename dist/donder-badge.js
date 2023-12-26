@@ -227,7 +227,7 @@ const G=(t,e)=>"method"===e.kind&&e.descriptor&&!("value"in e.descriptor)?{...e,
         color: var(--primary-background-color);
         background: var(--primary-color);
       }
-    `}_handleMoreInfoAction(t,e){console.log("more-info",e),t.stopPropagation(),this.hass.callService("browser_mod","more_info",{entity:e.entity})}_handleLightAction(t,e){console.log("light",e);const{entity:i,entity_data:o,entity_type:n}=e;switch(t.stopPropagation(),n){case"boolean":this.hass.callService("input_boolean","toggle",{entity_id:i});break;case"lights":this.hass.callService("light","toggle",Object.assign({entity_id:i},o));break;case"switch":this.hass.callService("switch","toggle",{entity_id:i})}}renderClimateBadge(t){const{entity:e}=t,{state:i,attributes:o}=this.hass.states[e];return H`
+    `}_handleMoreInfoAction(t,e){t.stopPropagation(),this.hass.callService("browser_mod","more_info",{entity:e.entity})}_handleLightAction(t,e){const{entity:i,entity_data:o,entity_type:n}=e;switch(t.stopPropagation(),n){case"boolean":this.hass.callService("input_boolean","toggle",{entity_id:i});break;case"lights":console.log("lights",i,o),this.hass.callService("light","toggle",Object.assign({entity_id:i},o));break;case"switch":this.hass.callService("switch","toggle",{entity_id:i})}}renderClimateBadge(t){const{entity:e}=t,{state:i,attributes:o}=this.hass.states[e];return H`
       <ha-card
         @action=${e=>this._handleMoreInfoAction(e,t)}
         .actionHandler=${bt({hasHold:vt(this.config.hold_action),hasDoubleClick:vt(this.config.double_tap_action)})}
