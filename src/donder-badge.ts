@@ -110,14 +110,25 @@ export class BoilerplateCard extends LitElement {
       .donder-badge {
         
       }
+      .state-badge {
+        width: 70px;
+        height: 70px;
+        border-radius: 100%;
+        display: flex;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
     `;
   }
 
   private _handleMoreInfoAction(ev: ActionHandlerEvent, entity): void {
     ev.stopPropagation();
-    this.hass.callService('browser_mod', 'more_info', {
-      entity: entity,
-    })
+    console.log(entity)
+    // this.hass.callService('browser_mod', 'more_info', {
+    //   entity: entity,
+    // })
   }
 
   protected renderClimateBadge(config): TemplateResult {
@@ -137,7 +148,7 @@ export class BoilerplateCard extends LitElement {
       >
         <ha-icon icon='mdi:thermometer'></ha-icon>
         <span>${attributes.current_temperature}${attributes.temperature_unit}</span>
-      </ha-card>>
+      </ha-card>
     `
   }
 
@@ -166,7 +177,7 @@ export class BoilerplateCard extends LitElement {
     console.log(config);
     // Gadget: Same as light, different icon
     return html`
-      <div class='gadget-badge'>
+      <div class='gadget-badge state-badge'>
         <ha-icon icon='mdi:lightbulb'></ha-icon>
         <span>On</span>
       </div>

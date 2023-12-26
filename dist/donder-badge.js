@@ -195,7 +195,17 @@ const G=(t,e)=>"method"===e.kind&&e.descriptor&&!("value"in e.descriptor)?{...e,
       .donder-badge {
         
       }
-    `}_handleMoreInfoAction(t,e){t.stopPropagation(),this.hass.callService("browser_mod","more_info",{entity:e})}renderClimateBadge(t){const{entity:e}=t,{state:i,attributes:n}=this.hass.states[e];return O`
+      .state-badge {
+        width: 70px;
+        height: 70px;
+        border-radius: 100%;
+        display: flex;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+    `}_handleMoreInfoAction(t,e){t.stopPropagation(),console.log(e)}renderClimateBadge(t){const{entity:e}=t,{state:i,attributes:n}=this.hass.states[e];return O`
       <ha-card
         @action=${t=>this._handleMoreInfoAction(t,e)}
         .actionHandler=${Et({hasHold:ft(this.config.hold_action),hasDoubleClick:ft(this.config.double_tap_action)})}
@@ -204,7 +214,7 @@ const G=(t,e)=>"method"===e.kind&&e.descriptor&&!("value"in e.descriptor)?{...e,
       >
         <ha-icon icon='mdi:thermometer'></ha-icon>
         <span>${n.current_temperature}${n.temperature_unit}</span>
-      </ha-card>>
+      </ha-card>
     `}renderLightBadge(t){return console.log(t),O`
       <div class='light-badge'>
         <ha-icon icon='mdi:lightbulb'></ha-icon>
@@ -215,7 +225,7 @@ const G=(t,e)=>"method"===e.kind&&e.descriptor&&!("value"in e.descriptor)?{...e,
         <ha-icon icon='mdi:window-shutter'></ha-icon>
       </div>
     `}renderGadgetBadge(t){return console.log(t),O`
-      <div class='gadget-badge'>
+      <div class='gadget-badge state-badge'>
         <ha-icon icon='mdi:lightbulb'></ha-icon>
         <span>On</span>
       </div>
