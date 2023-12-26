@@ -210,18 +210,18 @@ const G=(t,e)=>"method"===e.kind&&e.descriptor&&!("value"in e.descriptor)?{...e,
         @action=${t=>this._handleMoreInfoAction(t,e)}
         .actionHandler=${Et({hasHold:ft(this.config.hold_action),hasDoubleClick:ft(this.config.double_tap_action)})}
         tabindex="0"
-        class=${`climate-badge ${i}`}
+        class=${`climate-badge state-badge ${i}`}
       >
         <ha-icon icon='mdi:thermometer'></ha-icon>
         <span>${n.current_temperature}${n.temperature_unit}</span>
       </ha-card>
     `}renderLightBadge(t){return console.log(t),O`
-      <div class='light-badge'>
+      <div class='light-badge state-badge'>
         <ha-icon icon='mdi:lightbulb'></ha-icon>
         <span>On</span>
       </div>
     `}renderShutterBadge(t){return console.log(t),O`
-      <div class='shutter-badge'>
+      <div class='shutter-badge state-badge'>
         <ha-icon icon='mdi:window-shutter'></ha-icon>
       </div>
     `}renderGadgetBadge(t){return console.log(t),O`

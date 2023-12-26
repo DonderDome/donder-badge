@@ -144,7 +144,7 @@ export class BoilerplateCard extends LitElement {
           hasDoubleClick: hasAction(this.config.double_tap_action),
         })}
         tabindex="0"
-        class=${`climate-badge ${state}`}
+        class=${`climate-badge state-badge ${state}`}
       >
         <ha-icon icon='mdi:thermometer'></ha-icon>
         <span>${attributes.current_temperature}${attributes.temperature_unit}</span>
@@ -156,7 +156,7 @@ export class BoilerplateCard extends LitElement {
     console.log(config);
     // Light: Toggles on/of, show "On" UI when on
     return html`
-      <div class='light-badge'>
+      <div class='light-badge state-badge'>
         <ha-icon icon='mdi:lightbulb'></ha-icon>
         <span>On</span>
       </div>
@@ -167,7 +167,7 @@ export class BoilerplateCard extends LitElement {
     console.log(config);
     // Shutter: Toggles more info, shows icon and no on/off status
     return html`
-      <div class='shutter-badge'>
+      <div class='shutter-badge state-badge'>
         <ha-icon icon='mdi:window-shutter'></ha-icon>
       </div>
     `
