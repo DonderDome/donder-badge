@@ -241,8 +241,8 @@ export class BoilerplateCard extends LitElement {
     `
   }
 
-  protected renderGadgetBadge(config): TemplateResult {
-    // Gadget: Same as light, different icon
+  protected renderSwitchBadge(config): TemplateResult {
+    // Switch: Same as light, different icon
     const { entity } = config
     const { state } = this.hass.states[entity]
     
@@ -254,7 +254,7 @@ export class BoilerplateCard extends LitElement {
           hasDoubleClick: hasAction(this.config.double_tap_action),
         })}
         tabindex="0"
-        class=${`gadget-badge state-badge ${state}`}
+        class=${`switch-badge state-badge ${state}`}
       >
       <ha-icon icon=${state === 'on' ? 'mdi:toggle-switch-variant' : 'mdi:toggle-switch-variant-off'}></ha-icon>
       </ha-card>
@@ -265,12 +265,12 @@ export class BoilerplateCard extends LitElement {
     const { entity_type } = config
     if (entity_type === 'climate') {
       return this.renderClimateBadge(config)
-    } else if (entity_type === 'light') {
+    } else if (entity_type === 'lights') {
       return this.renderLightBadge(config)
     } else if (entity_type === 'shutter') {
       return this.renderShutterBadge(config)
-    } else if (entity_type === 'gadget') {
-      return this.renderGadgetBadge(config)
+    } else if (entity_type === 'switch') {
+      return this.renderSwitchBadge(config)
     } else {
       return html`
         <div class='unknown-badge'>
