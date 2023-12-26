@@ -135,20 +135,31 @@ export class BoilerplateCard extends LitElement {
     `;
   }
 
-  private _handleMoreInfoAction(ev: ActionHandlerEvent, entity): void {
-    console.log("more-info", entity)
+  private _handleMoreInfoAction(ev: ActionHandlerEvent, config): void {
+    console.log("more-info", config)
     ev.stopPropagation();
     // this.hass.callService('browser_mod', 'more_info', {
     //   entity: entity,
     // })
   }
 
-  private _handleLightAction(ev: ActionHandlerEvent, entity): void {
-    console.log("light", entity)
+  private _handleLightAction(ev: ActionHandlerEvent, config): void {
+    console.log("light", config)
+    const { entity, entity_data, entity_type } = config
+
     ev.stopPropagation();
-    // this.hass.callService('browser_mod', 'more_info', {
-    //   entity: entity,
-    // })
+
+    switch(entity_type) {
+      case "boolean":
+        this.hass.callService('input_boolean', 'toggle', {entity_id: entity})
+        break
+      case "lights":
+        this.hass.callService('light', 'toggle', {entity_id: entity, ...entity_data})
+        break
+      case "switch":
+        this.hass.callService('switch', 'toggle', {entity_id: entity})
+        break
+    }
   }
 
   protected renderClimateBadge(config): TemplateResult {
@@ -158,7 +169,7 @@ export class BoilerplateCard extends LitElement {
 
     return html`
       <ha-card
-        @action=${(ev) => this._handleMoreInfoAction(ev, entity)}
+        @action=${(ev) => this._handleMoreInfoAction(ev, config)}
         .actionHandler=${actionHandler({
           hasHold: hasAction(this.config.hold_action),
           hasDoubleClick: hasAction(this.config.double_tap_action),
@@ -179,7 +190,7 @@ export class BoilerplateCard extends LitElement {
     
     return html`
       <ha-card
-        @action=${(ev) => this._handleLightAction(ev, entity)}
+        @action=${(ev) => this._handleLightAction(ev, config)}
         .actionHandler=${actionHandler({
           hasHold: hasAction(this.config.hold_action),
           hasDoubleClick: hasAction(this.config.double_tap_action),
@@ -200,7 +211,7 @@ export class BoilerplateCard extends LitElement {
 
     return html`
       <ha-card
-        @action=${(ev) => this._handleMoreInfoAction(ev, entity)}
+        @action=${(ev) => this._handleMoreInfoAction(ev, config)}
         .actionHandler=${actionHandler({
           hasHold: hasAction(this.config.hold_action),
           hasDoubleClick: hasAction(this.config.double_tap_action),
@@ -220,7 +231,7 @@ export class BoilerplateCard extends LitElement {
     
     return html`
       <ha-card
-        @action=${(ev) => this._handleLightAction(ev, entity)}
+        @action=${(ev) => this._handleLightAction(ev, config)}
         .actionHandler=${actionHandler({
           hasHold: hasAction(this.config.hold_action),
           hasDoubleClick: hasAction(this.config.double_tap_action),
