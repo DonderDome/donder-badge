@@ -196,8 +196,8 @@ const G=(t,e)=>"method"===e.kind&&e.descriptor&&!("value"in e.descriptor)?{...e,
         
       }
       .state-badge {
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
         border-radius: 100%;
         display: flex;
         align-content: center;

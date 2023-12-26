@@ -111,8 +111,8 @@ export class BoilerplateCard extends LitElement {
         
       }
       .state-badge {
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
         border-radius: 100%;
         display: flex;
         align-content: center;
