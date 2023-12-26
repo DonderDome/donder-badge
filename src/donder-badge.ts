@@ -212,7 +212,7 @@ export class BoilerplateCard extends LitElement {
         tabindex="0"
         class=${`light-badge state-badge ${state}`}
       >
-        <ha-icon icon='mdi:thermometer'></ha-icon>
+        <ha-icon icon=${state === 'on' ? 'mdi:lightbulb-on-outline' : 'mdi:lightbulb-outline'}></ha-icon>
       </ha-card>
     `
   }
@@ -232,7 +232,7 @@ export class BoilerplateCard extends LitElement {
         tabindex="0"
         class=${`shutter-badge state-badge ${state}`}
       >
-        <ha-icon icon='mdi:thermometer'></ha-icon>
+        <ha-icon icon='mdi:window-shutter'></ha-icon>
       </ha-card>
     `
   }
@@ -252,7 +252,7 @@ export class BoilerplateCard extends LitElement {
         tabindex="0"
         class=${`gadget-badge state-badge ${state}`}
       >
-        <ha-icon icon='mdi:thermometer'></ha-icon>
+      <ha-icon icon=${state === 'on' ? 'mdi:toggle-switch-variant' : 'mdi:toggle-switch-variant-off'}></ha-icon>
       </ha-card>
     `
   }

@@ -240,7 +240,7 @@ const G=(t,e)=>"method"===e.kind&&e.descriptor&&!("value"in e.descriptor)?{...e,
         tabindex="0"
         class=${`light-badge state-badge ${i}`}
       >
-        <ha-icon icon='mdi:thermometer'></ha-icon>
+        <ha-icon icon=${"on"===i?"mdi:lightbulb-on-outline":"mdi:lightbulb-outline"}></ha-icon>
       </ha-card>
     `}renderShutterBadge(t){const{entity:e}=t,{state:i}=this.hass.states[e];return H`
       <ha-card
@@ -249,7 +249,7 @@ const G=(t,e)=>"method"===e.kind&&e.descriptor&&!("value"in e.descriptor)?{...e,
         tabindex="0"
         class=${`shutter-badge state-badge ${i}`}
       >
-        <ha-icon icon='mdi:thermometer'></ha-icon>
+        <ha-icon icon='mdi:window-shutter'></ha-icon>
       </ha-card>
     `}renderGadgetBadge(t){const{entity:e}=t,{state:i}=this.hass.states[e];return H`
       <ha-card
@@ -258,7 +258,7 @@ const G=(t,e)=>"method"===e.kind&&e.descriptor&&!("value"in e.descriptor)?{...e,
         tabindex="0"
         class=${`gadget-badge state-badge ${i}`}
       >
-        <ha-icon icon='mdi:thermometer'></ha-icon>
+      <ha-icon icon=${"on"===i?"mdi:toggle-switch-variant":"mdi:toggle-switch-variant-off"}></ha-icon>
       </ha-card>
     `}renderBadge(t){const{entityType:e}=t;return"climate"===e?this.renderClimateBadge(t):"light"===e?this.renderLightBadge(t):"shutter"===e?this.renderShutterBadge(t):"gadget"===e?this.renderGadgetBadge(t):H`
         <div class='unknown-badge'>
