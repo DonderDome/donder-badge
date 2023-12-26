@@ -147,7 +147,7 @@ export class BoilerplateCard extends LitElement {
         class=${`climate-badge state-badge ${state}`}
       >
         <ha-icon icon='mdi:thermometer'></ha-icon>
-        <span>${attributes.current_temperature}${attributes.temperature_unit}</span>
+        <div>${attributes.current_temperature}${attributes.temperature_unit}</div>
       </ha-card>
     `
   }

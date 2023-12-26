@@ -213,7 +213,7 @@ const G=(t,e)=>"method"===e.kind&&e.descriptor&&!("value"in e.descriptor)?{...e,
         class=${`climate-badge state-badge ${i}`}
       >
         <ha-icon icon='mdi:thermometer'></ha-icon>
-        <span>${n.current_temperature}${n.temperature_unit}</span>
+        <div>${n.current_temperature}${n.temperature_unit}</div>
       </ha-card>
     `}renderLightBadge(t){return console.log(t),O`
       <div class='light-badge state-badge'>
