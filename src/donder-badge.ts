@@ -77,7 +77,7 @@ export class BoilerplateCard extends LitElement {
 
   private _handleAction(ev: ActionHandlerEvent): void {
     if (this.hass && this.config && ev.detail.action) {
-      handleAction(this, this.hass, this.config, ev.detail.action);
+      // handleAction(this, this.hass, this.config, ev.detail.action);
     }
   }
 
@@ -136,8 +136,16 @@ export class BoilerplateCard extends LitElement {
   }
 
   private _handleMoreInfoAction(ev: ActionHandlerEvent, entity): void {
+    console.log("more-info", entity)
     ev.stopPropagation();
-    console.log(entity)
+    // this.hass.callService('browser_mod', 'more_info', {
+    //   entity: entity,
+    // })
+  }
+
+  private _handleLightAction(ev: ActionHandlerEvent, entity): void {
+    console.log("light", entity)
+    ev.stopPropagation();
     // this.hass.callService('browser_mod', 'more_info', {
     //   entity: entity,
     // })
@@ -165,34 +173,64 @@ export class BoilerplateCard extends LitElement {
   }
 
   protected renderLightBadge(config): TemplateResult {
-    console.log(config);
     // Light: Toggles on/of, show "On" UI when on
+    const { entity } = config
+    const { state } = this.hass.states[entity]
+    
     return html`
-      <div class='light-badge state-badge'>
-        <ha-icon icon='mdi:lightbulb'></ha-icon>
-        <span>On</span>
-      </div>
+      <ha-card
+        @action=${(ev) => this._handleLightAction(ev, entity)}
+        .actionHandler=${actionHandler({
+          hasHold: hasAction(this.config.hold_action),
+          hasDoubleClick: hasAction(this.config.double_tap_action),
+        })}
+        tabindex="0"
+        class=${`light-badge state-badge ${state}`}
+      >
+        <ha-icon icon='mdi:thermometer'></ha-icon>
+        <div>${state}</div>
+      </ha-card>
     `
   }
 
   protected renderShutterBadge(config): TemplateResult {
-    console.log(config);
     // Shutter: Toggles more info, shows icon and no on/off status
+    const { entity } = config
+    const { state } = this.hass.states[entity]
+
     return html`
-      <div class='shutter-badge state-badge'>
-        <ha-icon icon='mdi:window-shutter'></ha-icon>
-      </div>
+      <ha-card
+        @action=${(ev) => this._handleMoreInfoAction(ev, entity)}
+        .actionHandler=${actionHandler({
+          hasHold: hasAction(this.config.hold_action),
+          hasDoubleClick: hasAction(this.config.double_tap_action),
+        })}
+        tabindex="0"
+        class=${`shutter-badge state-badge ${state}`}
+      >
+        <ha-icon icon='mdi:thermometer'></ha-icon>
+      </ha-card>
     `
   }
 
   protected renderGadgetBadge(config): TemplateResult {
-    console.log(config);
     // Gadget: Same as light, different icon
+    const { entity } = config
+    const { state } = this.hass.states[entity]
+    
     return html`
-      <div class='gadget-badge state-badge'>
-        <ha-icon icon='mdi:lightbulb'></ha-icon>
-        <span>On</span>
-      </div>
+      <ha-card
+        @action=${(ev) => this._handleLightAction(ev, entity)}
+        .actionHandler=${actionHandler({
+          hasHold: hasAction(this.config.hold_action),
+          hasDoubleClick: hasAction(this.config.double_tap_action),
+        })}
+        tabindex="0"
+        class=${`gadget-badge state-badge ${state}`}
+      >
+        <ha-icon icon='mdi:thermometer'></ha-icon>
+        <div>${state}</div>
+      </ha-card>
     `
   }
 
