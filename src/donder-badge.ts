@@ -106,6 +106,7 @@ export class BoilerplateCard extends LitElement {
       .type-custom-donder-badge {
         height: 100%;
         width: 100%;
+        background: transparent;
       }
       .donder-badge {
         
